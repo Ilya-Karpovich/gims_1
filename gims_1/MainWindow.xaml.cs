@@ -1,8 +1,10 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Media.Imaging;
 
 namespace gims_1
@@ -10,6 +12,7 @@ namespace gims_1
     public partial class MainWindow : Window
     {
         string path;
+        List <string> methodName = new List <string> ();
         public MainWindow()
         {
             InitializeComponent();
@@ -45,6 +48,11 @@ namespace gims_1
             newBtm.Save(curFile, System.Drawing.Imaging.ImageFormat.Jpeg);
             newBtm.Dispose();
 
+
+        }
+
+        private void kontrastImgBtn_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

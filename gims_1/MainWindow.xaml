@@ -7,9 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Image x:Name="imageBox" Margin="79,37,84,94"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="551*"/>
+            <ColumnDefinition Width="249*"/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="imageBox" Margin="79,37,84,94" Grid.ColumnSpan="2"/>
         <Button x:Name="selectImageBtn" Content="Выбрать фотографию" HorizontalAlignment="Left" Margin="10,0,0,10" Width="153" Height="67" VerticalAlignment="Bottom" Click="selectImageBtn_Click"/>
         <Button x:Name="refactorImgBtn" Content="Изменить фотографию" HorizontalAlignment="Left" Margin="163,0,0,10" Width="153" Height="67" VerticalAlignment="Bottom" Click="refactorImgBtn_Click"/>
+        <Button x:Name="refactorImgBtn_Копировать" Content="Выделить контур" HorizontalAlignment="Left" Margin="316,0,0,10" Width="153" Height="67" VerticalAlignment="Bottom" Click="kontrastImgBtn_Click"/>
+        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="469,357,164,10" Grid.ColumnSpan="2"/>
 
     </Grid>
 </Window>
