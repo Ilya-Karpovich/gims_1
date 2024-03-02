@@ -19,11 +19,23 @@ namespace gims_1
     /// </summary>
     public partial class Gistogram : Window
     {
-        List<int> cord;
-        public Gistogram(List <int> gistCord)
+        private List<int> cord;
+        private double kontr;
+        public Gistogram(List <int> gistCord, double kontr)
         {
             this.cord= gistCord;
+            this.kontr= kontr;
             InitializeComponent();
+            this.ReduseDimension();
+            Polyline polyline = new Polyline();
+            polyline.Points = new PointCollection();
+            for (int i = 0; i < cord.Count; i++)
+            {
+                polyline.Points.Add(new Point((i + 20), (350 - cord[i])));
+            }
+            polyline.Stroke = Brushes.Black;
+            gisCanvas.Children.Add(polyline);
+            kontrLabel.Content = $"Контрасность: {this.kontr}";
         }
 
         private void ReduseDimension()
@@ -34,17 +46,6 @@ namespace gims_1
                 cord[i] /= (dimMax/350+5);
             }
         }
-        private void showBtn_Click(object sender, RoutedEventArgs e)
-        {
-            this.ReduseDimension();
-            Polyline polyline = new Polyline();
-            polyline.Points = new PointCollection();
-            for (int i= 0; i < cord.Count; i++)
-            {
-                polyline.Points.Add(new Point((i+20), (350-cord[i])));
-            }
-            polyline.Stroke = Brushes.Black;
-            gisCanvas.Children.Add(polyline);
-        }
+
     }
 }

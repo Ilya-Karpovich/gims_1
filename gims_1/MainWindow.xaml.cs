@@ -76,7 +76,7 @@ namespace gims_1
             KontrastGistogram kontrastGistogram = new KontrastGistogram();
             kontrastGistogram.SetBitmap(path);
             kontrastGistogram.MakeGistogram();
-            Gistogram gistogram = new Gistogram(kontrastGistogram.brightnes);
+            Gistogram gistogram = new Gistogram(kontrastGistogram.brightnes, kontrastGistogram.GetKontrast());
             gistogram.Show();
         }
     }

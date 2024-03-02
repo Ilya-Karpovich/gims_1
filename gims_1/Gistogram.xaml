@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:gims_1"
         mc:Ignorable="d"
         Title="Gistogram" Height="450" Width="344" ResizeMode="NoResize">
-    <Grid>
+    <Grid Margin="0,0,0,-6">
         <Canvas x:Name="gisCanvas" Margin="10,0,10,100"/>
-        <Button x:Name="showBtn" Content="Отобразить" Click="showBtn_Click" Margin="0,0,10,10" HorizontalAlignment="Right" Width="138" Height="31" VerticalAlignment="Bottom"/>
+        <Label x:Name="kontrLabel" Content="" HorizontalAlignment="Left" Margin="10,0,0,33" Width="150" Height="26" VerticalAlignment="Bottom"/>
 
     </Grid>
 </Window>
