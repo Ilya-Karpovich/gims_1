@@ -7,21 +7,6 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media.Imaging;
 
-public class Pixel
-{
-    public int red;
-    public int green;
-    public int blue;
-    public Pixel(byte red, byte green, byte blue)
-    {
-        this.red = red;
-        this.green = green;
-        this.blue = blue;
-    }
-    public Pixel()
-    {
-    }
-}
 public class PixelFilter
 {
     Pixel[,] px = new Pixel[3, 3];

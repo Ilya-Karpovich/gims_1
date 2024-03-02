@@ -35,7 +35,16 @@ public class KontrastGistogram
     public double GetKontrast()
     {
         double kontrast = 0;
+        for (int i = 0; i < this.brightnes.Count; i++)
+        {
+            if (brightnes[i] == 0)
+            {
+                brightnes.RemoveAt(i);
+                i--;
+            }
+        }
 
+        kontrast = brightnes.Count;
         return kontrast;
     }
 

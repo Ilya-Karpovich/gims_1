@@ -7,58 +7,75 @@ using System.Threading.Tasks;
 
 public class LinearKontur : Kontur
 {
-    private double kontrast;
+    private int kontrast;
+
     //Курсовые маски
-    public int[,] north=new int[3, 3] { {1, 1, 1}, { 1, -2, 1 }, { -1, -1, -1 } };
-    public int[,] northEast = new int[3, 3] { { 1, 1, 1 }, { -1, -2, 1 }, { -1, -1, 1 } };
-    public int[,] east = new int[3, 3] { { -1, 1, 1 }, { -1, -2, 1 }, { -1, 1, 1 } };
-    public int[,] southEast = new int[3, 3] { { -1, -1, 1 }, { -1, -2, 1 }, { 1, 1, 1 } };
-    public int[,] south = new int[3, 3] { { -1, -1, -1 }, { 1, -2, 1 }, { 1, 1, 1 } };
-    public int[,] southWest = new int[3, 3] { { 1, -1, -1 }, { 1, -2, -1 }, { 1, 1, 1 } };
-    public int[,] west = new int[3, 3] { { 1, 1, -1 }, { 1, -2, -1 }, { 1, 1, -1 } };
-    public int[,] northWest = new int[3, 3] { { 1, 1, 1 }, { 1, -2, -1 }, { 1, -1, -1 } };
+    public Mask north=new Mask("Курсовая маска (Север)", new int[3, 3] { {1, 1, 1}, { 1, -2, 1 }, { -1, -1, -1 } });
+    public Mask northEast = new Mask("Курсовая маска (Северо-Запад)",new int[3, 3] { { 1, 1, 1 }, { -1, -2, 1 }, { -1, -1, 1 } });
+    public Mask east = new Mask("Курсовая маска (Восток)",new int[3, 3] { { -1, 1, 1 }, { -1, -2, 1 }, { -1, 1, 1 } });
+    public Mask southEast = new Mask("Курсовая маска (Юго-Восток)", new int[3, 3] { { -1, -1, 1 }, { -1, -2, 1 }, { 1, 1, 1 } });
+    public Mask south =new Mask ("Курсовая маска (Юг)",new int[3, 3] { { -1, -1, -1 }, { 1, -2, 1 }, { 1, 1, 1 } });
+    public Mask southWest = new Mask("Курсовая маска (Юго-Запад)",new int[3, 3] { { 1, -1, -1 }, { 1, -2, -1 }, { 1, 1, 1 } });
+    public Mask west = new Mask("Курсовая маска (Запад)",new int[3, 3] { { 1, 1, -1 }, { 1, -2, -1 }, { 1, 1, -1 } });
+    public Mask northWest =new Mask("Курсовая маска (Северо-Запад)", new int[3, 3] { { 1, 1, 1 }, { 1, -2, -1 }, { 1, -1, -1 } });
 
     //Операторы Лапласа
-    public int[,] laplasH13 = new int[3, 3] { {0,-1,0}, {-1,4,-1}, {0,-1,0} };
-    public int[,] laplasH14 = new int[3, 3] { { -1, -1, -1 }, { -1, 8, -1 }, { -1, -1, -1 } };
-    public int[,] laplasH15 = new int[3, 3] { { 1, -2, 1 }, { -2, 4, -2 }, { 1, -2, 1 } };
+    public Mask laplasH13 = new Mask ("Оператор Лапласа (Н13)", new int[3, 3] { {0,-1,0}, {-1,4,-1}, {0,-1,0} });
+    public Mask laplasH14 = new Mask("Оператор Лапласа (Н14)", new int[3, 3] { { -1, -1, -1 }, { -1, 8, -1 }, { -1, -1, -1 } });
+    public Mask laplasH15 = new Mask("Оператор Лапласа (Н15)", new int[3, 3] { { 1, -2, 1 }, { -2, 4, -2 }, { 1, -2, 1 } });
 
-    public void SetKontrast(double kontr)
+    public void SetKontrast(int kontr)
     {
         this.kontrast = kontr;
     }
-
-    public System.Drawing.Color KursMaskKonturing()
+    public System.Drawing.Color SetColor(int px, int kontr)
     {
-        int red = 0;
-        int green = 0;
-        int blue = 0;
+        if (px > kontr)
+        {
+            return System.Drawing.Color.Black;
+        }
+        else
+        {
+            return System.Drawing.Color.White;
+        }
+    }
 
+    int CalkulateKontur(int x, int y, Mask mask)
+    {
+        this.SetPixelWindow(x, y);
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
             {
+                this.px[i, j].CalculateGrey();
+            }
+        }
+        int sumOfGrey=0;
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0;j < 3; j++)
+            {
+                px[i, j].grey *= mask.KonturingMask[i, j];
                 if (i != 1 && j != 1)
                 {
-                    red += px[i, j].red;
-                    green += px[i, j].green;
-                    blue += px[i, j].blue;
+                    sumOfGrey += px[i, j].grey;
                 }
             }
         }
+        px[1, 1].grey -= sumOfGrey;
+        return px[1, 1].grey;
+    }
 
-        red /= 8; green /= 8; blue /= 8;
-        int brightnes = red + green + blue;
-        int xbrightnes = px[1, 1].red + px[1, 1].green + px[1, 1].blue;
-
-        if (xbrightnes > brightnes)
+    public Bitmap MakeKonturing( Mask mask)
+    {
+        Bitmap bitmap=new Bitmap(bmp.Width, bmp.Height);
+        for (int i = 0;i < bmp.Width;i++)
         {
-            return System.Drawing.Color.FromArgb(red, green, blue);
+            for (int j=0;j < bmp.Height; j++)
+            {
+                bitmap.SetPixel(i, j, SetColor(CalkulateKontur(i, j, mask), this.kontrast));
+            }
         }
-        else
-        {
-            return System.Drawing.Color.FromArgb((byte)px[1, 1].red, (byte)px[1, 1].green, (byte)px[1, 1].blue);
-        }
-
+        return bitmap;
     }
 }
