@@ -30,7 +30,7 @@ public class LinearKontur : Kontur
     }
     private System.Drawing.Color SetColor(int px, int kontr)
     {
-        if (px > kontr)
+        if (px >= kontr )
         {
             return System.Drawing.Color.Black;
         }
@@ -57,13 +57,13 @@ public class LinearKontur : Kontur
             for (int j = 0;j < 3; j++)
             {
                 px[i, j].grey *= mask.KonturingMask[i, j];
-                if (i != 1 && j != 1)
+                if (i != 1 && j != 1 && mask.KonturingMask[i,j]<0)
                 {
                     sumOfGrey += px[i, j].grey;
                 }
             }
         }
-        px[1, 1].grey -= sumOfGrey;
+        px[1, 1].grey += sumOfGrey;
         return px[1, 1].grey;
     }
 

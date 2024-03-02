@@ -21,6 +21,6 @@ public class Pixel
     }
     public void CalculateGrey()
     {
-        this.grey=(this.red+this.green+this.blue)/3;
+        this.grey=((this.red+this.green+this.blue)/3);
     }
 }

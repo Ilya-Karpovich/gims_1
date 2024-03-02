@@ -32,20 +32,20 @@ public class KontrastGistogram
         }
         bmp.Dispose();
     }
-    public double GetKontrast()
+    public int GetKontrast()
     {
-        double kontrast = 0;
-        for (int i = 0; i < this.brightnes.Count; i++)
+
+        int gistStart=0, gistEnd=0;
+        for (int i = this.brightnes.Count-1; i >-1; i--)
         {
-            if (brightnes[i] == 0)
+            if (brightnes[i] != 0&&gistEnd==0)
             {
-                brightnes.RemoveAt(i);
-                i--;
+                gistEnd = i;
+                gistStart = gistEnd-(i / 5);
+                break;
             }
         }
-
-        kontrast = brightnes.Count;
-        return kontrast;
+        return (gistEnd+gistStart)/2;
     }
 
 }

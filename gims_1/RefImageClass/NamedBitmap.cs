@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 public class NamedBitmap
 {
-    Bitmap bitmap;
-    string name;
+    public Bitmap bitmap;
+    public string name;
     public NamedBitmap(Bitmap bitmap, string name)
     {
         this.bitmap = bitmap;

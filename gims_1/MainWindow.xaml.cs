@@ -12,20 +12,11 @@ namespace gims_1
     public partial class MainWindow : Window
     {
         string path="";
-        List <string> methodName = new List<string>() {"Курсовая маска (Север)","Метод двух разностей",
-            "Оператор Кирша","Курсовая маска (Северо-Запад)","Оператор Собела (1)","Курсовая маска (Северо-Восток)",
-            "Оператор Лапласа (Н13)","Курсовая маска (Юг)","Оператор Робертса (2)","Курсовая маска (Юго-Запад)",
-            "Метод разностей по столбцам","Курсовая маска (Юго-Восток)","Метод разностей по строкам",
-            "Оператор Лапласа (Н14)","Курсовая маска (Восток)","Оператор Лапласа (Н15)","Оператор Собела (2)",
-            "Курсовая маска (Запад)","Оператор Уоллиса","Оператор Робертса (1)","Оператор Превитта","Оператор Шарра",
-            "Оператор Робинсона"};
+        List<NamedBitmapImage> images = new List<NamedBitmapImage>();
+        private int imageListPosition = 0;
         public MainWindow()
         {
             InitializeComponent();
-            for (int i=0;i< methodName.Count; i++)
-            {
-                methodList.Items.Add(methodName[i]);
-            }
         }
 
         private void selectImageBtn_Click(object sender, RoutedEventArgs e)
@@ -34,7 +25,10 @@ namespace gims_1
             ofd.InitialDirectory=Directory.GetCurrentDirectory();
             ofd.ShowDialog();
             path= ofd.FileName;
-            imageBox.Source = new BitmapImage(new Uri($"{path}"));
+            images.Add(new NamedBitmapImage(new BitmapImage(new Uri($"{path}")), "Исходная фотография"));
+            imageBox.Source = images[0].Image;
+            imageName.Content = images[0].Name;
+
         }
 
         private void refactorImgBtn_Click(object sender, RoutedEventArgs e)
@@ -58,9 +52,9 @@ namespace gims_1
                     newBtm.SetPixel(i, j, filter.Filter());
                 }
             }
-            string curFile = Directory.GetCurrentDirectory()+"//image";
+            
             btm.Dispose();
-            newBtm.Save(curFile, System.Drawing.Imaging.ImageFormat.Jpeg);
+            images.Add(new NamedBitmapImage(NamedBitmapImage.BitmapToBitmapImage(newBtm), "Фото обработанное от шумов"));
             newBtm.Dispose();
 
 
@@ -68,6 +62,21 @@ namespace gims_1
 
         private void kontrastImgBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (path == "")
+            {
+                return;
+            }
+            LinearKontur linearKontur = new LinearKontur();
+            KontrastGistogram kontrastGistogram = new KontrastGistogram();
+            kontrastGistogram.SetBitmap(path);
+            kontrastGistogram.MakeGistogram();
+            linearKontur.SetKontrast(kontrastGistogram.GetKontrast());
+            linearKontur.SetBitmap(new Bitmap(path));
+            List<NamedBitmap> photo=linearKontur.GetKontures();
+            for (int i=0;i<photo.Count; i++)
+            {
+                images.Add(new NamedBitmapImage(NamedBitmapImage.BitmapToBitmapImage(photo[i].bitmap), photo[i].name));
+            }
 
         }
 
@@ -78,6 +87,27 @@ namespace gims_1
             kontrastGistogram.MakeGistogram();
             Gistogram gistogram = new Gistogram(kontrastGistogram.brightnes, kontrastGistogram.GetKontrast());
             gistogram.Show();
+        }
+
+        private void prevImage_Click(object sender, RoutedEventArgs e)
+        {
+            if (imageListPosition - 1  >= 0)
+            {
+                
+                imageListPosition--;
+                imageBox.Source = images[imageListPosition].Image;
+                imageName.Content = images[imageListPosition].Name;
+            }
+        }
+
+        private void nextImage_Click(object sender, RoutedEventArgs e)
+        {
+            if (imageListPosition + 1 <= images.Count - 1)
+            {
+                imageListPosition++;
+                imageBox.Source = images[imageListPosition].Image;
+                imageName.Content = images[imageListPosition].Name;
+            }
         }
     }
 }

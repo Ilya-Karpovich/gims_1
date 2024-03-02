@@ -72,6 +72,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="RefImageClass\Mask.cs" />
+    <Compile Include="RefImageClass\NamedBitmap.cs" />
+    <Compile Include="RefImageClass\NamedBitmapImage.cs" />
     <Compile Include="RefImageClass\NonLinearKontur.cs" />
     <Compile Include="RefImageClass\Pixel.cs" />
     <Compile Include="RefImageClass\PixelFilter.cs" />
