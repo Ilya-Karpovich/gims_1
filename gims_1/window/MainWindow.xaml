@@ -5,17 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:gims_1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="GIMS" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="551*"/>
-            <ColumnDefinition Width="249*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Image x:Name="imageBox" Margin="79,37,84,94" Grid.ColumnSpan="2"/>
+        <Image x:Name="imageBox" Margin="79,37,84,94"/>
         <Button x:Name="selectImageBtn" Content="Выбрать фотографию" HorizontalAlignment="Left" Margin="10,0,0,10" Width="153" Height="67" VerticalAlignment="Bottom" Click="selectImageBtn_Click"/>
         <Button x:Name="refactorImgBtn" Content="Изменить фотографию" HorizontalAlignment="Left" Margin="163,0,0,10" Width="153" Height="67" VerticalAlignment="Bottom" Click="refactorImgBtn_Click"/>
-        <Button x:Name="refactorImgBtn_Копировать" Content="Выделить контур" HorizontalAlignment="Left" Margin="316,0,0,10" Width="153" Height="67" VerticalAlignment="Bottom" Click="kontrastImgBtn_Click"/>
-        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="469,357,164,10" Grid.ColumnSpan="2"/>
+        <Button x:Name="refactorImgBtn_Копировать" Content="Выделить контур" HorizontalAlignment="Left" Margin="316,0,0,43" Width="153" Height="34" VerticalAlignment="Bottom" Click="kontrastImgBtn_Click"/>
+        <ListBox x:Name="methodList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="469,0,0,10" Height="67" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="268"/>
+        <Button x:Name="gistogramBtn" Content="Гистограма" HorizontalAlignment="Left" Margin="316,0,0,10" Width="153" Height="34" VerticalAlignment="Bottom" Click="gistogramBtn_Click"/>
 
     </Grid>
 </Window>
