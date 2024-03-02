@@ -36,16 +36,16 @@ public class KontrastGistogram
     {
 
         int gistStart=0, gistEnd=0;
-        for (int i = this.brightnes.Count-1; i >-1; i--)
+        for (int i =0; i < this.brightnes.Count; i++)
         {
-            if (brightnes[i] != 0&&gistEnd==0)
+            if (brightnes[i] != 0 && gistStart == 0)
             {
-                gistEnd = i;
-                gistStart = gistEnd-(i / 5);
+                gistStart = i;
+                gistEnd = gistEnd + ((this.brightnes.Count - i) / 5);
                 break;
             }
         }
-        return (gistEnd+gistStart)/2;
+        return (gistEnd + gistStart) / 2;
     }
 
 }
