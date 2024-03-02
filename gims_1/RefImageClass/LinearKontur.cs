@@ -42,6 +42,7 @@ public class LinearKontur : Kontur
 
     int CalkulateKontur(int x, int y, Mask mask)
     {
+        this.Clear();
         this.SetPixelWindow(x, y);
         for (int i = 0; i < 3; i++)
         {
