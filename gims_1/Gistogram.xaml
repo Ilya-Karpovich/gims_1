@@ -5,11 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:gims_1"
         mc:Ignorable="d"
-        Title="Gistogram" Height="450" Width="800">
+        Title="Gistogram" Height="450" Width="344" ResizeMode="NoResize">
     <Grid>
-        <Canvas x:Name="gisCanvas">
-            <Button x:Name="showBtn" Content="Отобразить" Canvas.Left="642" Canvas.Top="367" HorizontalAlignment="Center" VerticalAlignment="Top" Width="138" Height="50" Click="showBtn_Click"/>
-        </Canvas>
+        <Canvas x:Name="gisCanvas" Margin="10,0,10,100"/>
+        <Button x:Name="showBtn" Content="Отобразить" Click="showBtn_Click" Margin="0,0,10,10" HorizontalAlignment="Right" Width="138" Height="31" VerticalAlignment="Bottom"/>
 
     </Grid>
 </Window>

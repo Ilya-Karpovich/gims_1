@@ -26,10 +26,25 @@ namespace gims_1
             InitializeComponent();
         }
 
-
+        private void ReduseDimension()
+        {
+            int dimMax = cord.Max();
+            for (int i=0; i<cord.Count; i++)
+            {
+                cord[i] /= (dimMax/350+5);
+            }
+        }
         private void showBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            this.ReduseDimension();
+            Polyline polyline = new Polyline();
+            polyline.Points = new PointCollection();
+            for (int i= 0; i < cord.Count; i++)
+            {
+                polyline.Points.Add(new Point((i+20), (350-cord[i])));
+            }
+            polyline.Stroke = Brushes.Black;
+            gisCanvas.Children.Add(polyline);
         }
     }
 }

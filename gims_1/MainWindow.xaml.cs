@@ -73,7 +73,10 @@ namespace gims_1
 
         private void gistogramBtn_Click(object sender, RoutedEventArgs e)
         {
-            Gistogram gistogram = new Gistogram();
+            KontrastGistogram kontrastGistogram = new KontrastGistogram();
+            kontrastGistogram.SetBitmap(path);
+            kontrastGistogram.MakeGistogram();
+            Gistogram gistogram = new Gistogram(kontrastGistogram.brightnes);
             gistogram.Show();
         }
     }

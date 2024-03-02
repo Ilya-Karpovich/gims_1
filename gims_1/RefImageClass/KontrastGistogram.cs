@@ -8,10 +8,18 @@ using System.Threading.Tasks;
 public class KontrastGistogram
 {
     private Bitmap bmp;
-    private List<int> brightnes = new List<int> (256);
+    public List<int> brightnes = new List<int>(256);
+    public void SetList()
+    {
+        for (int i = 0; i < brightnes.Capacity; i++)
+        {
+            brightnes.Add(0);
+        }
+    }
     public void SetBitmap(string path)
     {
         this.bmp = new Bitmap(path);
+        this.SetList();
     }
     public void MakeGistogram()
     {
