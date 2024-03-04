@@ -45,7 +45,15 @@ public class KontrastGistogram
                 break;
             }
         }
-        return (gistEnd + gistStart) / 2;
+        int kontrast = 0;   
+        for (int i=gistStart; i < gistEnd; i++)
+        {
+            if ((this.brightnes[i] >= kontrast))
+            {
+                kontrast= i;
+            }
+        }
+        return kontrast;
     }
 
 }

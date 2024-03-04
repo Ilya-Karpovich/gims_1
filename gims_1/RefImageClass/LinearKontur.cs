@@ -42,7 +42,6 @@ public class LinearKontur : Kontur
 
     int CalkulateKontur(int x, int y, Mask mask)
     {
-        this.Clear();
         this.SetPixelWindow(x, y);
         for (int i = 0; i < 3; i++)
         {
@@ -51,20 +50,23 @@ public class LinearKontur : Kontur
                 this.px[i, j].CalculateGrey();
             }
         }
-        int sumOfGrey=0;
+        int sumOfMinusGrey=0, sumOfPlusGrey=0;
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0;j < 3; j++)
             {
                 px[i, j].grey *= mask.KonturingMask[i, j];
-                if (i != 1 && j != 1)
+                if (mask.KonturingMask[i, j] < 0)
                 {
-                    sumOfGrey += px[i, j].grey;
+                    sumOfMinusGrey += px[i, j].grey;
+                }
+                else
+                {
+                    sumOfPlusGrey += px[i, j].grey;
                 }
             }
         }
-        px[1, 1].grey += sumOfGrey;
-        return px[1, 1].grey;
+        return (sumOfMinusGrey+sumOfPlusGrey);
     }
 
     private NamedBitmap MakeKonturing(Mask mask)
