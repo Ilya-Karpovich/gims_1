@@ -56,4 +56,29 @@ public class KontrastGistogram
         return kontrast;
     }
 
+    public int Max()
+    {
+        int max = 0;
+        for (int i = 0; i < this.brightnes.Count; i++)
+        {
+            if (this.brightnes[i] != 0)
+            {
+                max = i;
+            }
+        }
+        return max;
+    }
+    public int Min()
+    {
+        int min = 0;
+        for (int i = (this.brightnes.Count-1); i > -1 ; i--)
+        {
+            if (this.brightnes[i] != 0)
+            {
+                min = i;
+            }
+        }
+        return min;
+    }
+
 }

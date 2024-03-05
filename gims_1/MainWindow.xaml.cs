@@ -70,7 +70,26 @@ namespace gims_1
             KontrastGistogram kontrastGistogram = new KontrastGistogram();
             kontrastGistogram.SetBitmap(path);
             kontrastGistogram.MakeGistogram();
-            linearKontur.SetKontrast(kontrastGistogram.GetKontrast());
+            if (porog.Text == "")
+            {
+                linearKontur.SetKontrast(kontrastGistogram.GetKontrast());
+                linearKontur.SetLight(kontrastGistogram.Max(), kontrastGistogram.Min());
+            }
+            else
+            {
+                string porKontr=porog.Text;
+                try
+                {
+                    int kont = int.Parse(porKontr);
+                    linearKontur.SetKontrast(kont);
+                    linearKontur.SetLight(kontrastGistogram.Max(), kontrastGistogram.Min());
+                }
+                catch
+                {
+                    MessageBox.Show("Некорректно введенный порог!");
+                    return;
+                }
+            }
             linearKontur.SetBitmap(new Bitmap(path));
             List<NamedBitmap> photo=linearKontur.GetKontures();
             for (int i=0;i<photo.Count; i++)

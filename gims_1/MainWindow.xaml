@@ -14,11 +14,12 @@
         <Button x:Name="selectImageBtn" Content="Выбрать фотографию" HorizontalAlignment="Left" Margin="10,0,0,10" Width="153" Height="67" VerticalAlignment="Bottom" Click="selectImageBtn_Click"/>
         <Button x:Name="refactorImgBtn" Content="Изменить фотографию" HorizontalAlignment="Left" Margin="163,0,0,10" Width="153" Height="67" VerticalAlignment="Bottom" Click="refactorImgBtn_Click"/>
         <Button x:Name="refactorImgBtn_Копировать" Content="Выделить контур" HorizontalAlignment="Left" Margin="316,0,0,43" Width="153" Height="34" VerticalAlignment="Bottom" Click="kontrastImgBtn_Click"/>
-        <ListBox x:Name="methodList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="469,0,0,10" Height="67" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="268"/>
         <Button x:Name="gistogramBtn" Content="Гистограма" HorizontalAlignment="Left" Margin="316,0,0,10" Width="153" Height="34" VerticalAlignment="Bottom" Click="gistogramBtn_Click"/>
         <Label x:Name="imageName" Content="" Margin="86,10,63,0" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
         <Button x:Name="nextImage" Content="&gt;" Margin="0,134,27,134" FontSize="36" Click="nextImage_Click" HorizontalAlignment="Right" Width="29"/>
         <Button x:Name="prevImage" Content="&lt;" HorizontalAlignment="Left" Margin="10,134,0,134" FontSize="36" Click="prevImage_Click"/>
+        <Label Content="Порог" HorizontalAlignment="Left" Margin="469,0,0,52" Height="26" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="porog" HorizontalAlignment="Left" Margin="469,0,0,34" TextWrapping="Wrap" Width="120" Height="18" VerticalAlignment="Bottom"/>
 
     </Grid>
 </Window>
