@@ -11,19 +11,19 @@ public class LinearKontur : Kontur
     private int MaxLight, MinLight;
 
     //Курсовые маски
-    private Mask north=new Mask("Курсовая маска (Север)", new int[3, 3] { {1, 1, 1}, { 1, -2, 1 }, { -1, -1, -1 } });
-    private Mask northEast = new Mask("Курсовая маска (Северо-Запад)",new int[3, 3] { { 1, 1, 1 }, { -1, -2, 1 }, { -1, -1, 1 } });
-    private Mask east = new Mask("Курсовая маска (Восток)",new int[3, 3] { { -1, 1, 1 }, { -1, -2, 1 }, { -1, 1, 1 } });
-    private Mask southEast = new Mask("Курсовая маска (Юго-Восток)", new int[3, 3] { { -1, -1, 1 }, { -1, -2, 1 }, { 1, 1, 1 } });
-    private Mask south =new Mask ("Курсовая маска (Юг)",new int[3, 3] { { -1, -1, -1 }, { 1, -2, 1 }, { 1, 1, 1 } });
-    private Mask southWest = new Mask("Курсовая маска (Юго-Запад)",new int[3, 3] { { 1, -1, -1 }, { 1, -2, -1 }, { 1, 1, 1 } });
-    private Mask west = new Mask("Курсовая маска (Запад)",new int[3, 3] { { 1, 1, -1 }, { 1, -2, -1 }, { 1, 1, -1 } });
-    private Mask northWest =new Mask("Курсовая маска (Северо-Запад)", new int[3, 3] { { 1, 1, 1 }, { 1, -2, -1 }, { 1, -1, -1 } });
+    public Mask north=new Mask("Курсовая маска (Север)", new int[3, 3] { {1, 1, 1}, { 1, -2, 1 }, { -1, -1, -1 } });
+    public Mask northEast = new Mask("Курсовая маска (Северо-Запад)",new int[3, 3] { { 1, 1, 1 }, { -1, -2, 1 }, { -1, -1, 1 } });
+    public Mask east = new Mask("Курсовая маска (Восток)",new int[3, 3] { { -1, 1, 1 }, { -1, -2, 1 }, { -1, 1, 1 } });
+    public Mask southEast = new Mask("Курсовая маска (Юго-Восток)", new int[3, 3] { { -1, -1, 1 }, { -1, -2, 1 }, { 1, 1, 1 } });
+    public Mask south =new Mask ("Курсовая маска (Юг)",new int[3, 3] { { -1, -1, -1 }, { 1, -2, 1 }, { 1, 1, 1 } });
+    public Mask southWest = new Mask("Курсовая маска (Юго-Запад)",new int[3, 3] { { 1, -1, -1 }, { 1, -2, -1 }, { 1, 1, 1 } });
+    public Mask west = new Mask("Курсовая маска (Запад)",new int[3, 3] { { 1, 1, -1 }, { 1, -2, -1 }, { 1, 1, -1 } });
+    public Mask northWest =new Mask("Курсовая маска (Северо-Запад)", new int[3, 3] { { 1, 1, 1 }, { 1, -2, -1 }, { 1, -1, -1 } });
 
     //Операторы Лапласа
-    private Mask laplasH13 = new Mask ("Оператор Лапласа (Н13)", new int[3, 3] { {0,-1,0}, {-1,4,-1}, {0,-1,0} });
-    private Mask laplasH14 = new Mask("Оператор Лапласа (Н14)", new int[3, 3] { { -1, -1, -1 }, { -1, 8, -1 }, { -1, -1, -1 } });
-    private Mask laplasH15 = new Mask("Оператор Лапласа (Н15)", new int[3, 3] { { 1, -2, 1 }, { -2, 4, -2 }, { 1, -2, 1 } });
+    public Mask laplasH13 = new Mask ("Оператор Лапласа (Н13)", new int[3, 3] { {0,-1,0}, {-1,4,-1}, {0,-1,0} });
+    public Mask laplasH14 = new Mask("Оператор Лапласа (Н14)", new int[3, 3] { { -1, -1, -1 }, { -1, 8, -1 }, { -1, -1, -1 } });
+    public Mask laplasH15 = new Mask("Оператор Лапласа (Н15)", new int[3, 3] { { 1, -2, 1 }, { -2, 4, -2 }, { 1, -2, 1 } });
 
     public void SetKontrast(int kontr)
     {
@@ -76,7 +76,7 @@ public class LinearKontur : Kontur
         return (sumOfMinusGrey+sumOfPlusGrey);
     }
 
-    private NamedBitmap MakeKonturing(Mask mask)
+    public NamedBitmap MakeKonturing(Mask mask)
     {
         Bitmap bitmap=new Bitmap(bmp.Width, bmp.Height);
         for (int i = 0;i < bmp.Width;i++)
@@ -120,7 +120,7 @@ public class LinearKontur : Kontur
         return normalize;
     }
 
-    private NamedBitmap MakeLaplasKonturing(Mask mask)
+    public NamedBitmap MakeLaplasKonturing(Mask mask)
     {
         Bitmap bitmap = new Bitmap(bmp.Width, bmp.Height);
         for (int i = 0; i < bmp.Width; i++)
@@ -133,27 +133,6 @@ public class LinearKontur : Kontur
         NamedBitmap nBmp = new NamedBitmap(bitmap, mask.Name);
         return nBmp;
     }
-
-
-    public List<NamedBitmap> GetKontures()
-    {
-        List<NamedBitmap > list = new List<NamedBitmap>();
-
-        //list.Add(MakeKonturing(north));
-        //list.Add(MakeKonturing(northEast));
-        //list.Add(MakeKonturing(east));
-        //list.Add(MakeKonturing(southEast));
-        //list.Add(MakeKonturing(south));
-        //list.Add(MakeKonturing(west));
-        //list.Add(MakeKonturing(southWest));
-        //list.Add(MakeKonturing(northWest));
-        list.Add(MakeLaplasKonturing(laplasH13));
-        list.Add(MakeLaplasKonturing(laplasH14));
-        list.Add(MakeLaplasKonturing(laplasH15));
-
-        return list;
-    }
-
     public int Normalize(int num, int max, int min)
     {
         int temp = (num - min) * (255 / max - min);

@@ -19,7 +19,8 @@
         <Button x:Name="nextImage" Content="&gt;" Margin="0,134,27,134" FontSize="36" Click="nextImage_Click" HorizontalAlignment="Right" Width="29"/>
         <Button x:Name="prevImage" Content="&lt;" HorizontalAlignment="Left" Margin="10,134,0,134" FontSize="36" Click="prevImage_Click"/>
         <Label Content="Порог" HorizontalAlignment="Left" Margin="469,0,0,52" Height="26" VerticalAlignment="Bottom"/>
-        <TextBox x:Name="porog" HorizontalAlignment="Left" Margin="469,0,0,34" TextWrapping="Wrap" Width="120" Height="18" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="porog" HorizontalAlignment="Left" Margin="469,0,0,34" TextWrapping="Wrap" Width="44" Height="18" VerticalAlignment="Bottom"/>
+        <ListBox x:Name="methNameLB" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="518,0,10,10" Height="67" VerticalAlignment="Bottom"/>
 
     </Grid>
 </Window>
